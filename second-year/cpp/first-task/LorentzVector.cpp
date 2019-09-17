@@ -5,7 +5,7 @@
 LorentzVector::LorentzVector() {
 	x_ = y_ = z_ = t_ = 0;
 }
-LorentzVector::LorentzVector(double x, double y, double z, double t) {
+LorentzVector::LorentzVector(double t, double x, double y, double z) {
 	x_ = x;
 	y_ = y;
 	z_ = z;
@@ -36,10 +36,10 @@ double LorentzVector::t() const {
 	return t_;
 }
 double LorentzVector::dot(const LorentzVector& other) const {
-	return c * c * t_ * other.t() - x_ * other.x() - y_ * other.y_ - z_ * other.z();
+	return c * c * t_ * other.t() - x_ * other.x() - y_ * other.y() - z_ * other.z();
 }
 double LorentzVector::norm() const {
-	return this->dot(*this);
+	return dot(*this);
 }
 LorentzVector LorentzVector::add(const LorentzVector& other) const {
 	return LorentzVector(x_ + other.x(),
@@ -68,9 +68,9 @@ void LorentzVector::read() {
 }
 void LorentzVector::print() const {
 	std::cout << "ct: " << c * t_ << std::endl;
-	std::cout << "x: " << c * x_ << std::endl;
-	std::cout << "y: " << c * y_ << std::endl;
-	std::cout << "z: " << c * z_ << std::endl;
+	std::cout << "x: " << x_ << std::endl;
+	std::cout << "y: " << y_ << std::endl;
+	std::cout << "z: " << +z_ << std::endl;
 }
 void LorentzVector::zboost(double v) {
 	double gamma = sqrt(1 - v * v / c / c);
